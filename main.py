@@ -9,17 +9,19 @@ from random import randint
 
 import os, sys
 
+import UI
+
 
 def rpath(obj):
     return os.fspath(plpath(__file__).parent / obj)
 
 
-class Widget(QtW.QWidget):
+class Widget(QtW.QWidget, UI.Ui_Form):
     def paintEvent(self, event):
         painter = QtG.QPainter(self)
 
         painter.setRenderHint(QtG.QPainter.RenderHint.Antialiasing)
-        painter.setPen(QtG.QPen(QtG.QColor(255, 255, 0), 1))
+        painter.setPen(QtG.QPen(QtG.QColor(255, 255, 255), 1))
         painter.setBrush(QtG.QColor(255, 255, 255, 255))
 
         def n(mn, mx):
@@ -29,6 +31,7 @@ class Widget(QtW.QWidget):
             for i in range(0, 333):
                 r = n(10, 69)
                 x, y = n(0, self.width()), n(0, self.width())
+                painter.setPen(QtG.QPen(QtG.QColor(n(0, 255), n(0, 255), n(0, 255)), n(1, 3)))
                 painter.drawArc(x - r, y - r, r, r, 0, 180 * 16 * 2)
         else:
             painter.drawRect(self.rect())
@@ -36,8 +39,9 @@ class Widget(QtW.QWidget):
     def __init__(self):
         super().__init__()
 
-        uic.loadUi(rpath('UI.ui'), self)
-        self.setWindowTitle('yellow balls')
+        self.setupUi(self)
+
+        self.setWindowTitle('random balls')
 
         self.drawArcs = False
 
