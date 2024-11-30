@@ -1,7 +1,5 @@
 from PyQt6 import QtWidgets as QtW
 from PyQt6 import QtGui as QtG
-from PyQt6 import QtCore as QtC
-from PyQt6 import uic
 
 from pathlib import Path as plpath
 
